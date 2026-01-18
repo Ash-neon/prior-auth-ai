@@ -146,8 +146,29 @@ async def global_exception_handler(request, exc):
         status_code=500,
         content={"error": "Internal server error"}
     )
+# --------------------------------------------------- Updated Main for API ------------------------------------------------------
+# Include API v1 router
+from backend.api.v1.router import api_router
+app.include_router(api_router, prefix="/api/v1")
 
 
+@app.get("/")
+async def root():
+    """Root endpoint - redirect to API docs."""
+    return {
+        "message": "Prior Authorization AI Platform",
+        "version": "1.0.0",
+        "api": "/api/v1",
+        "docs": "/docs",
+        "health": "/api/v1/health"
+    }
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for load balancers."""
+    return {"status": "healthy", "service": "prior-auth-ai"}
+# -----------------------------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     import uvicorn
     
