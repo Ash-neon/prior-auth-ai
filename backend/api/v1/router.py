@@ -9,13 +9,11 @@ Version: 1.0.0
 """
 
 from fastapi import APIRouter
-from backend.api.v1.endpoints import auth, users
+from backend.api.v1.endpoints import auth, users, pa, patients, providers, payers
 
 # Import endpoint routers (will be created in future phases)
 # from backend.api.v1.endpoints import (
-#     pa,
 #     documents,
-#     patients,
 #     submissions,
 #     appeals,
 #     analytics,
@@ -70,6 +68,30 @@ api_router.include_router(
     users.router,
     prefix="/users",
     tags=["users"]
+)
+
+api_router.include_router(
+    pa.router,
+    prefix="/pa",
+    tags=["prior-authorizations"]
+)
+
+api_router.include_router(
+    patients.router,
+    prefix="/patients",
+    tags=["patients"]
+)
+
+api_router.include_router(
+    providers.router,
+    prefix="/providers",
+    tags=["providers"]
+)
+
+api_router.include_router(
+    payers.router,
+    prefix="/payers",
+    tags=["payers"]
 )
 
 
