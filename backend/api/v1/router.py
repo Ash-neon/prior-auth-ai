@@ -9,18 +9,16 @@ Version: 1.0.0
 """
 
 from fastapi import APIRouter
-from backend.api.v1.endpoints import auth
+from backend.api.v1.endpoints import auth, users
 
 # Import endpoint routers (will be created in future phases)
 # from backend.api.v1.endpoints import (
-#     auth,
 #     pa,
 #     documents,
 #     patients,
 #     submissions,
 #     appeals,
 #     analytics,
-#     users,
 #     admin,
 #     agents
 # )
@@ -60,19 +58,22 @@ async def root():
         "health": "/api/v1/health"
     }
 
+
+# Include endpoint routers
 api_router.include_router(
     auth.router,
     prefix="/auth",
     tags=["authentication"]
 )
 
-# Include endpoint routers (to be added in future phases)
-# api_router.include_router(
-#     auth.router,
-#     prefix="/auth",
-#     tags=["authentication"]
-# )
-# 
+api_router.include_router(
+    users.router,
+    prefix="/users",
+    tags=["users"]
+)
+
+
+# Additional endpoint routers (to be added in future phases)
 # api_router.include_router(
 #     pa.router,
 #     prefix="/pa",
@@ -107,12 +108,6 @@ api_router.include_router(
 #     analytics.router,
 #     prefix="/analytics",
 #     tags=["analytics"]
-# )
-# 
-# api_router.include_router(
-#     users.router,
-#     prefix="/users",
-#     tags=["users"]
 # )
 # 
 # api_router.include_router(
