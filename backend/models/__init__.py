@@ -1,24 +1,40 @@
 """
-Models Package
-==============
+Database Models Package
+=======================
 
-SQLAlchemy ORM models for the Prior Authorization AI platform.
+Centralizes all SQLAlchemy models for the Prior Authorization AI Platform.
+
+This package contains all database models organized by domain:
+- User and authentication models
+- Clinic and organization models
+- Audit logging models
+- (Future: PA, Patient, Document models in subsequent phases)
+
+All models inherit from backend.db.base.Base which provides:
+- UUID primary keys
+- Automatic timestamps
+- Soft delete functionality
+- Audit trail fields
+- Multi-tenant support
+- JSONB metadata
 
 Author: Prior Auth AI Team
 Version: 1.0.0
 """
 
-from models.base import Base
-from models.user import User
-from models.clinic import Clinic
-from models.audit_log import AuditLog
+from backend.db.base import Base
+from backend.models.user import User, UserRole, UserStatus
+from backend.models.clinic import Clinic, ClinicStatus
+from backend.models.audit_log import AuditLog, AuditAction
 
-# Import all models here to ensure they're registered with Base.metadata
-# This is critical for Alembic migrations to detect all tables
-
+# Export all models for Alembic auto-detection and easy imports
 __all__ = [
     "Base",
     "User",
+    "UserRole",
+    "UserStatus",
     "Clinic",
+    "ClinicStatus",
     "AuditLog",
+    "AuditAction",
 ]
