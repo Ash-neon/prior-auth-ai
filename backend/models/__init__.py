@@ -26,6 +26,17 @@ from backend.db.base import Base
 from backend.models.user import User, UserRole, UserStatus
 from backend.models.clinic import Clinic, ClinicStatus
 from backend.models.audit_log import AuditLog, AuditAction
+from backend.models.user import User, UserRole
+from backend.models.prior_authorization import (
+    PriorAuthorization,
+    PAStatus,
+    PAUrgency,
+    PAType,
+    PAStatusHistory,
+)
+from backend.models.patient import Patient, Gender
+from backend.models.provider import Provider, ProviderType, ProviderSpecialty
+from backend.models.payer import Payer, PayerType, SubmissionMethod
 
 # Export all models for Alembic auto-detection and easy imports
 __all__ = [
@@ -37,4 +48,21 @@ __all__ = [
     "ClinicStatus",
     "AuditLog",
     "AuditAction",
+     # PA models
+    "PriorAuthorization",
+    "PAStatus",
+    "PAUrgency",
+    "PAType",
+    "PAStatusHistory",
+    # Patient models
+    "Patient",
+    "Gender",
+    # Provider models
+    "Provider",
+    "ProviderType",
+    "ProviderSpecialty",
+    # Payer models
+    "Payer",
+    "PayerType",
+    "SubmissionMethod",
 ]
